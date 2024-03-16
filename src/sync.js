@@ -7,9 +7,9 @@ module.exports = async () => {
 
 
      if (ProductCategory) {
-        Product.updateMany({ //? Filter:
+        Product.updateMany({ 
              "ProductCategory": { $exists: false }
-     }, { //? Update:
+     }, { 
              "ProductCategoryId": ProductCategory._id 
        }).catch(err => console.log(err))
     }

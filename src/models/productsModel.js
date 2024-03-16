@@ -28,7 +28,7 @@ const productCategorySchema = new mongoose.Schema(
 const productSchema = new mongoose.Schema(
   {
     productCategoryId: {
-      type: mongoose.Schema.Types.ObjectId, // ForeignKey, RelationalID
+      type: mongoose.Schema.Types.ObjectId, 
       ref: 'ProductCategory',
       required: true,
   },
