@@ -17,16 +17,21 @@ app.use(
     secret: process.env.SECRET_KEY,
   })
 );
+
 app.use(require("./src/middlewares/postCors"))
 app.use(require("./src/middlewares/auth"));
 app.use(require("./src/middlewares/query"));
 
 app.all("/", (req, res) => {
-  res.send({
-    error: false,
-    message: "welcome store",
-    loginUser: req.session,
-  });
+  if(req.isAdmin){
+    res.send({
+      error: false,
+      message: "welcome store",
+      loginUser: req.session,
+     
+    });
+  }
+ 
 });
 
 app.use("/product", require("./src/routes/productRouter"));

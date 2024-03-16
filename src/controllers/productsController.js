@@ -4,9 +4,10 @@ require("express-async-errors");
 
 const { Product, ProductCategory } = require("../models/productsModel");
 
+
 module.exports.ProductCategory = {
   list: async (req, res) => {
-    const data = await ProductCategory.find();
+    const data = await ProductCategory.find()
     res.status(200).send({
       error: false,
       data: data,
@@ -52,7 +53,7 @@ module.exports.ProductCategory = {
 module.exports.Product = {
   list: async (req, res) => {
     // const data= await Product.find();
-    const data = await res.getQueryList(Product);
+    const data = await res.getQueryList(Product,"productCategoryId","name");
     res.status(200).send({
       error: false,
       data: data,
@@ -60,16 +61,24 @@ module.exports.Product = {
     });
   },
   create: async (req, res) => {
-    const data = await Product.create(req.body);
-    res.status(201).send({
-      error: false,
-      body: req.body,
-      data: data,
-    });
+    const data = await Product.create(req.body);;
+    if(!req.isAdmin){
+      res.status(201).send({
+        error: true,
+       
+      });
+    }else{
+      res.status(201).send({
+        error: false,
+        body: req.body,
+        data: data,
+      });
+    }
+   
   },
 
   read: async (req, res) => {
-    const data = await Product.find({ _id: req.params.productId });
+    const data = await Product.find({ _id: req.params.productId }).populate('productCategoryId',"name -_id");
     res.status(202).send({
       error: false,
       data: data,

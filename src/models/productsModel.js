@@ -63,13 +63,7 @@ const productSchema = new mongoose.Schema(
       trim: true,
       required: true,
     },
-    category: {
-      type: String,
-      trim: true,
-      required: true,
-      lowercase: true,
-      ref: "ProductCategory",
-    },
+    
     thumbnail: {
       type: String,
       required: true,

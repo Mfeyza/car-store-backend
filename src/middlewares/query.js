@@ -21,8 +21,8 @@ module.exports=(req,res,next)=>{
     let skip=Number(req.query?.skip)
     skip=skip> 0 ? skip : (page*limit)
 
- res.getQueryList= async function (Query) {
-    return await Query.find({...filter, ...searchQuery}).sort(sort).skip(skip).limit(limit)
+ res.getQueryList= async function (Query, populate) {
+    return await Query.find({...filter, ...searchQuery}).sort(sort).skip(skip).limit(limit).populate(populate)
  }
 
  res.getQueryListDetails= async (Query)=>{

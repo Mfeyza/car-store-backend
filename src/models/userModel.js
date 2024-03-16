@@ -23,7 +23,7 @@ password:{
     set:(password)=>passwordEncrypt(password)
 },
 firstName:String,
-lastName:String
+lastName:String,
 
 }, {
     collection:'user',
